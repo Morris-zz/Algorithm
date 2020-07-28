@@ -13,22 +13,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * @reviewer
  */
 public class PollAlgorithm extends BaseLoadBalanceAlgorithm {
-    private ConcurrentHashMap<String,Integer> indexMap = new ConcurrentHashMap<String,Integer>();
+    private ConcurrentHashMap<String, Integer> indexMap = new ConcurrentHashMap();
 
     @Override
     public ProviderConfig select(List<ProviderConfig> configs, Object o) {
         Integer index = indexMap.get(configs.get(0).getInterfaceName());
-        if (index == null){
-            indexMap.put(configs.get(0).getInterfaceName(),0);
+        if (index == null) {
+            indexMap.put(configs.get(0).getInterfaceName(), 0);
             index = 0;
-        }else {
+        } else {
             index++;
-            if (index >= configs.size()){
+            if (index >= configs.size()) {
                 index = 0;
             }
-            indexMap.put(configs.get(0).getInterfaceName(),index);
+            indexMap.put(configs.get(0).getInterfaceName(), index);
         }
         return configs.get(index);
-
     }
 }

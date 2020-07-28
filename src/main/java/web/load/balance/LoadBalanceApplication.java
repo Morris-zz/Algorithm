@@ -1,6 +1,7 @@
 package web.load.balance;
 
 import web.load.balance.algorithm.PollAlgorithm;
+import web.load.balance.algorithm.PollingWeightAlgorithm;
 import web.load.balance.algorithm.RandomAlgorithm;
 import web.load.balance.algorithm.RandomWeightAlgorithm;
 
@@ -18,7 +19,8 @@ public class LoadBalanceApplication {
     public static void main(String[] args) {
 //        loadBalance(new RandomAlgorithm(),20,100);
 //        loadBalance(new RandomWeightAlgorithm(),20,100);
-        loadBalance(new PollAlgorithm(),20,100);
+//        loadBalance(new PollAlgorithm(),20,100);
+        loadBalance(new PollingWeightAlgorithm(),9,1000);
     }
 
     /**
