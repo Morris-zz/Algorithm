@@ -1,9 +1,6 @@
 package web.load.balance;
 
-import web.load.balance.algorithm.PollAlgorithm;
-import web.load.balance.algorithm.PollingWeightAlgorithm;
-import web.load.balance.algorithm.RandomAlgorithm;
-import web.load.balance.algorithm.RandomWeightAlgorithm;
+import web.load.balance.algorithm.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,9 @@ public class LoadBalanceApplication {
 //        loadBalance(new RandomAlgorithm(),20,100);
 //        loadBalance(new RandomWeightAlgorithm(),20,100);
 //        loadBalance(new PollAlgorithm(),20,100);
-        loadBalance(new PollingWeightAlgorithm(),9,1000);
+//        loadBalance(new PollingWeightAlgorithm(),9,1000);
+//        loadBalance(new LeastActiveAlgorithm(),9,100);
+        loadBalance(new UniformityHashAlgorithm(),9,100);
     }
 
     /**
@@ -38,16 +37,18 @@ public class LoadBalanceApplication {
         for(int i = 0; i< configNum; i++){
             ProviderConfig config = new ProviderConfig();
             config.setInterfaceName("com.serviceImpl");
-            config.setHost("127.0.0.1");
+            config.setHost("127.0.0."+i);
             config.setPort(i);
             config.setWeight(new Random().nextInt(100));
+            config.setCallTime(new Random().nextInt(100));
             configs.add(config);
+
         }
 
         //System.out.println(configs);
 
         for(int i = 0; i< testCount ; i++){
-            ProviderConfig config = strategy.select(configs,null);
+            ProviderConfig config = strategy.select(configs,"127.0.0."+i);
             // System.out.println("选中的:"+config);
             Integer count = counts[config.getPort()];
             counts[config.getPort()] = ++count;
@@ -55,7 +56,9 @@ public class LoadBalanceApplication {
         }
 
         for(int i = 0; i< configNum; i++){
-            System.out.println("序号:" + i + " 权重：" + configs.get(i).getWeight() + "--次数：" + counts[i]);
+//            System.out.println("序号:" + i + " 权重：" + configs.get(i).getWeight() + "--次数：" + counts[i]);
+//            System.out.println("序号:" + i + " 耗时：" + configs.get(i).getCallTime() + "--次数：" + counts[i]);
+            System.out.println("序号:" + i + " ip：" + configs.get(i).getHost() + "--次数：" + counts[i]);
         }
     }
 
