@@ -9,3 +9,4 @@ out
 gen
 *.class
 
+/target/classes/META-INF/Algorithm.kotlin_module
