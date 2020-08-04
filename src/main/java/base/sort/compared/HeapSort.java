@@ -40,7 +40,8 @@ public class HeapSort {
      * @param j   数组的长度
      */
     public static void adjustHeap(int[] arr, int i, int j) {
-        int temp = arr[i];//定义一个变量保存开始的结点
+        //定义一个变量保存开始的结点
+        int temp = arr[i];
         //k就是该结点的左子结点下标
         for (int k = 2 * i + 1; k < j; k = 2 * k + 1) {
             //比较左右两个子结点的大小，k始终记录两者中较大值的下标
