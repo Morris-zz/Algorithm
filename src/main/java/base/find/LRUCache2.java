@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @reviewer
  */
 public class LRUCache2 {
-    class LruNode {
+    static class LruNode {
         int key;
         int value;
         LruNode prev;
@@ -23,11 +23,10 @@ public class LRUCache2 {
         }
     }
 
-    private HashMap<Integer, LruNode> map = new HashMap<Integer, LruNode>();
+    private final HashMap<Integer, LruNode> map = new HashMap<Integer, LruNode>();
     private int size;
-    private int capacity;
-    private LruNode head;
-    private LruNode tail;
+    private final int capacity;
+    private final LruNode head,tail;
 
     public LRUCache2(int capacity) {
         this.size = 0;
@@ -37,9 +36,10 @@ public class LRUCache2 {
         head.next = tail;
         tail.prev = head;
     }
-    private int get(int key){
+
+    private int get(int key) {
         LruNode lruNode = map.get(key);
-        if (lruNode == null){
+        if (lruNode == null) {
             return -1;
         }
         moveToHead(lruNode);
@@ -64,6 +64,7 @@ public class LRUCache2 {
 
     /**
      * 将存在节点移动到head
+     *
      * @param node
      */
     private void moveToHead(LruNode node) {
@@ -73,6 +74,7 @@ public class LRUCache2 {
 
     /**
      * 删除节点
+     *
      * @param node
      */
     private void removeNode(LruNode node) {
