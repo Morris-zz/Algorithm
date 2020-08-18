@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author: morris
- * @Date: 2020/8/18 11:11
+ * @Date: 2020/8/18 11:12
  * @reviewer
  */
 public class ArrayBlockingQueueZ<E> {
