@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * 随机权重
  * @Author: morris
  * @Date: 2020/7/27 17:18
  * @description
